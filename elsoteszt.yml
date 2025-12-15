@@ -1,0 +1,36 @@
+import unittest
+import math
+
+# Az Armstrong-szám ellenőrző függvény
+def is_armstrong(szam):
+    osszeg = 0
+    szam_str = str(szam)
+    for i in szam_str:
+        osszeg += math.pow(int(i), len(szam_str))
+    return int(szam) == osszeg
+
+# Teszt osztály, amely a unittest modulra épít
+class TestArmstrongNumber(unittest.TestCase):
+
+    def test_armstrong_true(self):
+        # Tesztelünk egy ismert Armstrong-számot: 153
+        self.assertTrue(is_armstrong(153))
+        
+    def test_armstrong_false(self):
+        # Tesztelünk egy nem Armstrong-számot: 123
+        self.assertFalse(is_armstrong(123))
+    
+    def test_single_digit(self):
+        # Mivel minden egyjegyű szám Armstrong-szám
+        self.assertTrue(is_armstrong(7))
+    
+    def test_large_armstrong(self):
+        # Tesztelünk egy nagyobb Armstrong-számot: 9474
+        self.assertTrue(is_armstrong(9474))
+
+    def test_non_armstrong_large(self):
+        # Tesztelünk egy nagyobb számot, ami nem Armstrong-szám
+        self.assertFalse(is_armstrong(9999))
+
+if __name__ == "__main__":
+    unittest.main()
